@@ -1,0 +1,47 @@
+void setup() {
+  // inicializa uart a 9600 bauds por segundos:
+  
+  Serial.begin(9600);
+  pinMode(2, OUTPUT); //amarillo
+  pinMode(3, OUTPUT); //azul
+  pinMode(4, OUTPUT); //rojo
+
+}
+
+void loop() {
+  // Set colores de LED y sus salidas Digitales.  Lee la entrada anaógica en el pin 1.
+  int yellow = 2;
+  int blue = 3;
+  int red = 4;
+  int sensorValue = analogRead(A1);
+
+  // Set the initial state of the LEDs to OFF
+  digitalWrite(2, LOW);
+  digitalWrite(3, LOW);
+  digitalWrite(4, LOW);
+  
+  // Logic Loop that sets the required LED to ON
+  if (sensorValue >= 670) 
+  {
+    (digitalWrite(yellow, HIGH));
+    (Serial.print("El tanque está muy seco!!!!!    "));
+  }
+  if ((sensorValue <= 669) && (sensorValue >=500)) 
+  {
+    (digitalWrite(blue, HIGH));
+    (Serial.print("El tanque está PERFECTO!!!!!    "));
+  }
+  if (sensorValue <= 499) 
+  {
+    (digitalWrite(red, HIGH));
+    (Serial.print("El tanque está muy humedo!!!!!    "));
+  }
+  
+
+  Serial.print("La humendad del tanque es: ");
+  Serial.println(sensorValue);
+  delay(500);        // Retardo entre mediciones
+
+
+
+}
